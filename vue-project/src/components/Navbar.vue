@@ -41,9 +41,7 @@ interface Link {
 }
 
 const links: Link[] = [
-  { label: 'sobre', href: '#sobre' },
   { label: 'trajetória', href: '#trajetoria' },
-  { label: 'projetos', href: '#projetos' },
   { label: 'certificados', href: '#certificados' },
   { label: 'contato', href: '#contato' },
 ]
