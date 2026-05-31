@@ -1,12 +1,12 @@
 <template>
   <section id="contato" class="max-w-180 mx-auto px-6 sm:px-8 py-20">
-    <p class="font-mono text-xs tracking-widest text-text-400 mb-10">// # CONTATO</p>
+    <p class="font-mono text-xs tracking-widest text-text-400 mb-10">// CONTATO</p>
 
     <div class="grid md:grid-cols-2 gap-10">
       <div>
         <h2 class="text-2xl sm:text-3xl text-text-900 mb-4">Vamos conversar</h2>
 
-        <p class="text-text-600 leading-relaxed">Aberto a oportunidades, colaborações ou apenas trocar uma ideia.</p>
+        <p class="text-text-600 leading-relaxed">Estou aberto a oportunidades e colaborações.</p>
       </div>
 
       <div class="flex flex-col gap-3">
@@ -17,7 +17,7 @@
             {{ c.label }}
           </span>
 
-          <span class="text-text-400 transition group-hover:translate-x-1 group-hover:text-text-900"> → </span>
+          <span class="text-brand transition group-hover:translate-x-1 group-hover:text-text-900"> → </span>
         </a>
       </div>
     </div>

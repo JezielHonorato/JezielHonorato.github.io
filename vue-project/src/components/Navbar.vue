@@ -1,38 +1,55 @@
 <template>
-  <nav class="sticky top-0 z-50 backdrop-blur-md bg-background-50/80 border-b border-text-200 px-6 sm:px-8 h-14 flex items-center justify-between">
-    <a class="font-mono text-xs tracking-widest text-text-900"> JEZIEL.HONORATO </a>
+  <nav class="sticky top-0 z-50 backdrop-blur-md bg-bg-base/80 border-b border-border-main px-6 sm:px-8 h-14 flex items-center justify-between">
+    <a class="font-mono text-xs tracking-widest text-text-main"> JEZIEL.HONORATO </a>
 
     <div class="flex items-center gap-6">
-      <ul class="hidden sm:flex gap-6 text-xs font-mono text-text-500">
+      <ul class="hidden sm:flex gap-6 text-xs font-mono text-text-muted">
         <li v-for="l in links" :key="l.href">
-          <a :href="l.href" class="relative transition hover:text-text-900">
+          <a :href="l.href" class="relative transition hover:text-text-main group">
             {{ l.label }}
-
-            <span class="absolute left-0 -bottom-1 h-px w-0 bg-text-900 transition-all duration-200 group-hover:w-full"></span>
+            <span class="absolute left-0 -bottom-1 h-px w-0 bg-text-main transition-all duration-200 group-hover:w-full"></span>
           </a>
         </li>
       </ul>
-
-      <button @click="toggleDark" class="flex items-center justify-center w-9 h-9 rounded-md border border-text-200 text-text-600 transition-all duration-200 hover:bg-background-100 hover:text-text-900 hover:-translate-y-px active:translate-y-0">
-        <component :is="isDark ? IconSun : IconMoon" class="w-4 h-4" />
-      </button>
+      <div class="flex gap-2">
+        <button v-for="tema in temas" :key="tema.nome" @click="mudarTema(tema.nome as 'light' | 'dark' | 'kill-bill')" class="w-5 h-5 rounded-full transition" :class="[tema.cor, temaAtual === tema.nome ? 'ring-2 ring-text-main' : '']" />
+      </div>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { IconSun, IconMoon } from '@/icons'
-
-const isDark = ref(false)
 
 onMounted(() => {
-  isDark.value = document.documentElement.classList.contains('dark')
+  const temaSalvo = (localStorage.getItem('theme') as 'light' | 'dark' | 'kill-bill') ?? 'light'
+
+  mudarTema(temaSalvo)
 })
 
-function toggleDark() {
-  document.documentElement.classList.toggle('dark')
-  isDark.value = !isDark.value
+const temaAtual = ref<'light' | 'dark' | 'kill-bill'>('light')
+
+const temas = [
+  { nome: 'light', cor: 'bg-white border' },
+  { nome: 'dark', cor: 'bg-black' },
+  { nome: 'kill-bill', cor: 'bg-yellow-400' },
+]
+
+function mudarTema(tema: 'light' | 'dark' | 'kill-bill'): void {
+  const root = document.documentElement
+
+  root.classList.remove('dark', 'theme-kill-bill')
+
+  if (tema === 'dark') {
+    root.classList.add('dark')
+  } 
+  if (tema === 'kill-bill') {
+    root.classList.add('theme-kill-bill')
+  }
+
+  temaAtual.value = tema
+
+  localStorage.setItem('theme', tema)
 }
 
 interface Link {
@@ -41,9 +58,9 @@ interface Link {
 }
 
 const links: Link[] = [
-  { label: 'sobre', href: '#sobre' },
+  // { label: 'sobre', href: '#sobre' },
   { label: 'trajetória', href: '#trajetoria' },
-  { label: 'projetos', href: '#projetos' },
+  // { label: 'projetos', href: '#projetos' },
   { label: 'certificados', href: '#certificados' },
   { label: 'contato', href: '#contato' },
 ]
