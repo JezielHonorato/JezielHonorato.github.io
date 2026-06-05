@@ -3,7 +3,7 @@
     <p class="font-mono text-xs tracking-widest text-text-400 mb-10">// CERTIFICADOS</p>
 
     <div class="grid sm:grid-cols-2 gap-4">
-      <div v-for="cert in certs" :key="cert.nome" @click="openCert(cert)" class="group cursor-pointer block p-5 rounded-xl border border-text-200 bg-background-50 transition-all duration-200 hover:-translate-y-0.5 hover:bg-background-100 hover:border-text-300 hover:shadow-sm">
+      <div v-for="cert in certs" :key="cert.nome" @click="openCert(cert)" class="group cursor-pointer block p-5 rounded-xl border border-text-200 bg-background-50 transition-all duration-200 hover:-translate-y-0.5 hover:bg-bg-hover hover:border-text-300 hover:shadow-sm">
         <p class="text-sm font-medium text-text-900 mb-1 leading-snug">
           {{ cert.nome }}
         </p>

@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick } from 'vue'
+import { ref, onMounted, watch, nextTick } from 'vue'
 import Navbar from './components/Navbar.vue'
 import Hero from './components/Hero.vue'
 import Timeline from './components/Timeline.vue'
@@ -26,7 +26,12 @@ import Certificates from './components/Certificates.vue'
 import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
 import Settings from './components/Settings.vue'
-import { isSettingsOpen } from '@/store/settings'
+import { isSettingsOpen, mudarTema, type Tema } from '@/store/settings'
+import { carregarTema } from '@/store/theme'
+
+onMounted(() => {
+  carregarTema()
+})
 
 const settingsContainer = ref<HTMLElement | null>(null)
 

@@ -12,53 +12,18 @@
         </li>
       </ul>
       <div class="flex gap-2">
-        <component :is="IconSettings" @click="openSettings()" class="w-4 h-4 cursor-pointer" />
-        <!--
-			<button v-for="tema in temas" :key="tema.nome" @click="mudarTema(tema.nome as 'light' | 'dark' | 'kill-bill')" class="w-5 h-5 rounded-full transition" :class="[tema.cor, temaAtual === tema.nome ? 'ring-2 ring-text-main' : '']" />
-		-->
-      </div>	
+        <IconSettings @click="openSettings()" class="w-4 h-4 cursor-pointer" />
+      </div>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
 import { IconSettings } from '@/icons'
-import { ref, onMounted } from 'vue'
-import { isSettingsOpen, toggleSettings } from '@/store/settings'
-
-onMounted(() => {
-  const temaSalvo = (localStorage.getItem('theme') as 'light' | 'dark' | 'kill-bill') ?? 'light'
-
-  mudarTema(temaSalvo)
-})
+import { toggleSettings } from '@/store/settings'
 
 function openSettings(): void {
   toggleSettings()
-}
-
-const temaAtual = ref<'light' | 'dark' | 'kill-bill'>('light')
-
-const temas = [
-  { nome: 'light', cor: 'bg-white border' },
-  { nome: 'dark', cor: 'bg-black' },
-  { nome: 'kill-bill', cor: 'bg-yellow-400' },
-]
-
-function mudarTema(tema: 'light' | 'dark' | 'kill-bill'): void {
-  const root = document.documentElement
-
-  root.classList.remove('dark', 'theme-kill-bill')
-
-  if (tema === 'dark') {
-    root.classList.add('dark')
-  }
-  if (tema === 'kill-bill') {
-    root.classList.add('theme-kill-bill')
-  }
-
-  temaAtual.value = tema
-
-  localStorage.setItem('theme', tema)
 }
 
 interface Link {
