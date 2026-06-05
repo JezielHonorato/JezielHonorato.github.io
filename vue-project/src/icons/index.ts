@@ -1,6 +1,7 @@
-export { default as IconGithub } from "./IconGithub.vue"
-export { default as IconLinkedin } from "./IconLinkedin.vue"
-export { default as IconMail } from "./IconMail.vue"
-export { default as IconSun } from "./IconSun.vue"
-export { default as IconMoon } from "./IconMoon.vue"
-export { default as IconInstagram } from "./IconInstagram.vue"
+export { default as IconGithub } from './IconGithub.vue'
+export { default as IconLinkedin } from './IconLinkedin.vue'
+export { default as IconMail } from './IconMail.vue'
+export { default as IconSun } from './IconSun.vue'
+export { default as IconMoon } from './IconMoon.vue'
+export { default as IconInstagram } from './IconInstagram.vue'
+export { default as IconSettings } from './IconSettings.vue'

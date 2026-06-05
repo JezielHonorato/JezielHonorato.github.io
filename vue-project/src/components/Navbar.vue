@@ -12,20 +12,29 @@
         </li>
       </ul>
       <div class="flex gap-2">
-        <button v-for="tema in temas" :key="tema.nome" @click="mudarTema(tema.nome as 'light' | 'dark' | 'kill-bill')" class="w-5 h-5 rounded-full transition" :class="[tema.cor, temaAtual === tema.nome ? 'ring-2 ring-text-main' : '']" />
-      </div>
+        <component :is="IconSettings" @click="openSettings()" class="w-4 h-4 cursor-pointer" />
+        <!--
+			<button v-for="tema in temas" :key="tema.nome" @click="mudarTema(tema.nome as 'light' | 'dark' | 'kill-bill')" class="w-5 h-5 rounded-full transition" :class="[tema.cor, temaAtual === tema.nome ? 'ring-2 ring-text-main' : '']" />
+		-->
+      </div>	
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
+import { IconSettings } from '@/icons'
 import { ref, onMounted } from 'vue'
+import { isSettingsOpen, toggleSettings } from '@/store/settings'
 
 onMounted(() => {
   const temaSalvo = (localStorage.getItem('theme') as 'light' | 'dark' | 'kill-bill') ?? 'light'
 
   mudarTema(temaSalvo)
 })
+
+function openSettings(): void {
+  toggleSettings()
+}
 
 const temaAtual = ref<'light' | 'dark' | 'kill-bill'>('light')
 
@@ -42,7 +51,7 @@ function mudarTema(tema: 'light' | 'dark' | 'kill-bill'): void {
 
   if (tema === 'dark') {
     root.classList.add('dark')
-  } 
+  }
   if (tema === 'kill-bill') {
     root.classList.add('theme-kill-bill')
   }
@@ -58,9 +67,7 @@ interface Link {
 }
 
 const links: Link[] = [
-  // { label: 'sobre', href: '#sobre' },
   { label: 'trajetória', href: '#trajetoria' },
-  // { label: 'projetos', href: '#projetos' },
   { label: 'certificados', href: '#certificados' },
   { label: 'contato', href: '#contato' },
 ]
