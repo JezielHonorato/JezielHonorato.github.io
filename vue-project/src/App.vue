@@ -7,14 +7,13 @@
       <Timeline />
       <Certificates />
       <Contact />
+      <Footer />
     </div>
 
     <div v-if="isSettingsOpen" id="config-panel" ref="settingsContainer" class="border-t md:border-t-0 md:border-l border-border-main bg-bg-base/50 backdrop-blur-md sticky top-14 h-auto md:h-[calc(100vh-3.5rem)] overflow-y-auto">
       <Settings />
     </div>
   </main>
-
-  <Footer />
 </template>
 
 <script setup lang="ts">
@@ -26,11 +25,11 @@ import Certificates from './components/Certificates.vue'
 import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
 import Settings from './components/Settings.vue'
-import { isSettingsOpen, mudarTema, type Tema } from '@/store/settings'
-import { carregarTema } from '@/store/theme'
+import { isSettingsOpen } from '@/store/settings'
+import { loadSettings } from '@/store/theme'
 
 onMounted(() => {
-  carregarTema()
+  loadSettings()
 })
 
 const settingsContainer = ref<HTMLElement | null>(null)

@@ -18,49 +18,78 @@ export const temas = [
   },
 ] as const
 
-export type Tema = (typeof temas)[number]['nome']
+// Configurações de tema
+export const temaAtual = ref('light')
 
-export const temaAtual = ref<Tema>('light')
-
-const classesTema: Record<Tema, string | null> = {
-  light: null,
-  dark: 'dark',
-  'kill-bill': 'theme-kill-bill',
-}
-
-function aplicarTema(tema: Tema): void {
+function applyTheme(tema: string): void {
   const root = document.documentElement
 
-  Object.values(classesTema)
+  Object.values(temas.map((t) => t.nome))
     .filter(Boolean)
     .forEach((classe) => {
       root.classList.remove(classe!)
     })
 
-  const classe = classesTema[tema]
+  const classe = temas.find((t) => t.nome === tema)?.nome
 
   if (classe) {
     root.classList.add(classe)
   }
 }
 
-export function mudarTema(tema: Tema): void {
-  aplicarTema(tema)
+export function mudarTema(tema: string): void {
+  applyTheme(tema)
 
   temaAtual.value = tema
 
   localStorage.setItem('theme', tema)
 }
 
-export function carregarTema(): void {
-  const temaSalvo = localStorage.getItem('theme')
+// Configurações de fonte
 
-  const temaExiste = temas.some((tema) => tema.nome === temaSalvo)
+export const fontScale = ref(100)
+const MAX_SCALE = 140
+const MIN_SCALE = 70
+const STEP = 10
 
-  if (temaExiste) {
-    mudarTema(temaSalvo as Tema)
-    return
+export function updateHtmlFontSize() {
+  document.documentElement.style.fontSize = `${fontScale.value}%`
+  localStorage.setItem('user-font-scale', fontScale.value.toString())
+}
+
+export function increaseFont(): void {
+  if (fontScale.value < MAX_SCALE) {
+    fontScale.value += STEP
+    updateHtmlFontSize()
+  }
+}
+
+export function decreaseFont(): void {
+  if (fontScale.value > MIN_SCALE) {
+    fontScale.value -= STEP
+    updateHtmlFontSize()
+  }
+}
+
+export function normalizeFont(): void {
+  fontScale.value = 100
+  updateHtmlFontSize()
+}
+
+// Carregar configurações iniciais
+export function loadSettings(): void {
+  const savedScale = localStorage.getItem('user-font-scale')
+  if (savedScale) {
+    fontScale.value = parseInt(savedScale, 10)
   }
 
+  const temaSalvo = localStorage.getItem('theme')
+  const temaExiste = temas.some((tema) => tema.nome === temaSalvo)
+
+  updateHtmlFontSize()
+  if (temaExiste) {
+    mudarTema(temaSalvo as string)
+    return
+  }
   mudarTema('light')
 }
