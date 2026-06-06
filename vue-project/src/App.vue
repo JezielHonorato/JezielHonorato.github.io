@@ -1,4 +1,5 @@
 <template>
+  <MatrixRain />
   <Navbar />
 
   <main :class="[isSettingsOpen ? 'grid md:grid-cols-[1fr_400px] min-h-[calc(100vh-3.5rem)]' : '']">
@@ -18,6 +19,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch, nextTick } from 'vue'
+import MatrixRain from './components/MatrixRain.vue'
 import Navbar from './components/Navbar.vue'
 import Hero from './components/Hero.vue'
 import Timeline from './components/Timeline.vue'

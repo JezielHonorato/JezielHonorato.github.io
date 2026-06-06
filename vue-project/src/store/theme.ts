@@ -16,6 +16,11 @@ export const temas = [
     label: 'Kill Bill',
     preview: 'bg-yellow-400',
   },
+  {
+    nome: 'matrix',
+    label: 'Matrix',
+    preview: 'bg-[#030704] text-[#00ff41] border-[#00380f]' // Classes tailwind para o botão bonitinho
+  }
 ] as const
 
 // Configurações de tema

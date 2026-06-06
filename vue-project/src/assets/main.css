@@ -65,7 +65,26 @@
     --font-h: 'Impact', sans-serif;
     --font-b: 'ITC Busorama', sans-serif;
   }
+  .matrix {
+    /* Fundos baseados no puro preto e cinzas digitais bem escuros */
+    --bg-base: #030704; /* Preto quase absoluto com um leve toque verde */
+    --bg-surface: #0a110c; /* Cinza/Verde bem escuro para painéis e cartões */
+    --bg-hover: #142419; /* Destaque para quando passar o mouse */
 
+    /* Textos focados no verde brilhante e variações opacas */
+    --text-main: #00ff41; /* O famoso "Green Matrix" brilhante e super legível */
+    --text-muted: #00b32d; /* Verde médio para textos secundários */
+    --text-subtle: #005f18; /* Verde escuro para detalhes discretos */
+
+    /* Cores de destaque (Brand) */
+    --brand: #00ff41; /* Verde principal correndo pelo código */
+    --brand-secondary: #ffffff; /* Branco (representa os flashes de luz ou o Neo) */
+    --border-main: #00380f; /* Linhas finas em verde bem escuro */
+
+    /* Fontes: Mantendo a identidade hacker/terminal */
+    --font-h: 'Atkinson Hyperlegible Mono', monospace;
+    --font-b: 'Atkinson Hyperlegible Mono', monospace;
+  }
   body {
     @apply bg-bg-base text-text-main font-body transition-colors duration-300;
   }
